@@ -31,4 +31,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-             ${{ secrets.DOCKER_USERNAME }}/${{ env.REPOSITORY }}:${{ env.REGISTRY }}
+             ${{ secrets.DOCKER_USERNAME }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
