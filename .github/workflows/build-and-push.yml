@@ -3,7 +3,11 @@ name: Build base image and push to DockerHub.
 
 on:
   workflow_dispatch:
-  
+
+env:
+  REPOSITORY: aws-brand-sentiment-base-image
+  IMAGE_TAG: latest
+
 jobs:
       
   build-and-push:
@@ -21,14 +25,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       
       - name: Build and Push Base Image
-        env:
-          REGISTRY: ${{ secrets.DOCKER_USERNAME }}
-          REPOSITORY: aws-brand-sentiment-base-image
-          IMAGE_TAG: latest
         uses: docker/build-push-action@v2.10.0
         with:
           context: .
           platforms: linux/amd64
           push: true
           tags: |
-            $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          ${{ secrets.DOCKER_USERNAME }}/${{ env.REPOSITORY }}:${{ env.REGISTRY }}
